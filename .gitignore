@@ -4,6 +4,7 @@
 # cache
 .vscode
 .mypy_cache
+/__pycache__
 app/src/__pycache__
 app/src/app/__pycache__
 app/src/app/core/__pycache__

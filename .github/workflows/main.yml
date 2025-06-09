@@ -26,12 +26,15 @@ jobs:
           key: ${{ runner.os }}-venv-${{ hashFiles('**/poetry.lock') }}
 
       - name: Install dependencies
-        run: poetry install --no-interaction
+        run: |
+          cd app
+          poetry install --no-interaction
 
       - name: Run migrations
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
         run: |
+          cd app
           poetry run alembic upgrade head
 
       - name: Run tests
@@ -39,4 +42,5 @@ jobs:
           SECRET_KEY: ${{ secrets.SECRET_KEY }}
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
         run: |
+          cd app
           poetry run pytest

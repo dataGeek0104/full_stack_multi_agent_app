@@ -34,7 +34,7 @@ jobs:
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
         run: |
-          cd app
+          cd app/src
           poetry run alembic upgrade head
 
       - name: Run tests

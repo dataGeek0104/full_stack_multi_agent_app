@@ -44,22 +44,6 @@ docker compose exec backend pytest
 
 ---
 
-## ▶️ Running App
-
-The app runs via:
-
-```bash
-docker compose up backend
-```
-
-or interactively:
-
-```bash
-docker compose exec backend poetry run python src/run.py
-```
-
----
-
 ## 🐘 Database Connection
 
 Configured via `.env`:

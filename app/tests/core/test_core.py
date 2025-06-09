@@ -13,7 +13,7 @@ def client():
 
 
 def test_health_check(client):
-    response = client.get("/health")
+    response = client.get("/health-check")
     assert (
         response.status_code == 200
     )  # Optional: use `assert response.status_code == 200  # nosec`

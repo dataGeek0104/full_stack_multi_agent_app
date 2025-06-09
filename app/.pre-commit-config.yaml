@@ -1,0 +1,44 @@
+repos:
+  - repo: https://github.com/psf/black
+    rev: 24.3.0
+    hooks:
+      - id: black
+
+  - repo: https://github.com/pre-commit/mirrors-isort
+    rev: v5.10.1  # ✅ valid and stable tag
+    hooks:
+      - id: isort
+
+  - repo: https://github.com/charliermarsh/ruff-pre-commit
+    rev: v0.4.0
+    hooks:
+      - id: ruff
+
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.5.0
+    hooks:
+      - id: check-yaml
+      - id: check-added-large-files
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+      - id: debug-statements
+      - id: check-merge-conflict
+      - id: forbid-new-submodules
+      - id: check-toml
+
+  - repo: https://github.com/Yelp/detect-secrets
+    rev: v1.4.0
+    hooks:
+      - id: detect-secrets
+
+  - repo: https://github.com/PyCQA/bandit
+    rev: 1.7.6
+    hooks:
+      - id: bandit
+        args: ['-r', 'src/']
+
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v1.8.0
+    hooks:
+      - id: mypy
+        additional_dependencies: ['types-requests']

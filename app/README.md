@@ -26,24 +26,6 @@ All dependencies and services are installed via `poetry`.
 
 ---
 
-## 📦 Key Dependencies
-
-Declared in `pyproject.toml` and installed inside Docker container via Poetry:
-
-```bash
-docker compose exec backend poetry install
-```
-
-## 🧪 Testing
-
-Run tests from container:
-
-```bash
-docker compose exec backend pytest
-```
-
----
-
 ## 🐘 Database Connection
 
 Configured via `.env`:

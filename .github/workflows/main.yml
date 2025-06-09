@@ -5,6 +5,22 @@ on: [push, pull_request]
 jobs:
   build:
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:13
+        env:
+          POSTGRES_USER: lgma_user_000
+          POSTGRES_PASSWORD: ${{ secrets.DATABASE_USER_PASSWORD }}
+          POSTGRES_DB: lgmadb
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    env:
+      DATABASE_URL: ${{ secrets.DATABASE_URL }}
     steps:
       - uses: actions/checkout@v2
 

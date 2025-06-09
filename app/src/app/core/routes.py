@@ -1,4 +1,6 @@
-from flask import Blueprint, jsonify
+from flask import Blueprint, jsonify  # type: ignore[import-not-found]
+from sqlalchemy import text  # type: ignore[import-not-found]
+from src.app.extensions import db
 
 api_bp = Blueprint("api", __name__)
 
@@ -7,5 +9,14 @@ api_bp = Blueprint("api", __name__)
 def health_check():
     try:
         return jsonify({"message": "Yay! The app is working fine!"}), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
+@api_bp.route("/db-conn-check", methods=["GET"])
+def db_conn_check():
+    try:
+        db.session.execute(text("SELECT 1"))
+        return jsonify({"message": "Yay! The DB is working fine!"}), 200
     except Exception as e:
         return jsonify({"error": str(e)}), 500

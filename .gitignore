@@ -1,2 +1,7 @@
 # Environment variables
-app/.env
+.env
+
+# cache
+.mypy_cache
+app/src/app/__pycache__
+app/src/app/core/__pycache__

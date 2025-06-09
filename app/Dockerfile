@@ -31,4 +31,4 @@ EXPOSE 5001
 WORKDIR /app
 
 # Default command (adjust if different app entry point)
-CMD ["poetry", "run", "python", "src/run.py"]
+CMD ["poetry", "run", "python", "-m", "src.run"]

@@ -3,5 +3,6 @@
 
 # cache
 .mypy_cache
+app/src/__pycache__
 app/src/app/__pycache__
 app/src/app/core/__pycache__

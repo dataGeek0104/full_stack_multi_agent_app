@@ -2,7 +2,7 @@ import os
 
 import pytest  # type: ignore[import-not-found]
 from flask import Flask  # type: ignore[import-not-found]
-from src.app.core.routes import api_bp
+from src.app.core.routes import core_bp
 from src.app.extensions import db
 
 
@@ -14,7 +14,7 @@ def client():
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
     db.init_app(app)
-    app.register_blueprint(api_bp)
+    app.register_blueprint(core_bp)
 
     with app.app_context():
         db.create_all()

@@ -14,7 +14,7 @@ WORKDIR /app
 
 # Copy only the poetry files to install dependencies first (cache optimization)
 COPY pyproject.toml poetry.lock ./
-RUN poetry config virtualenvs.create false \
+RUN poetry config virtualenvs.create true \
     && poetry install --no-interaction --no-ansi \
     && poetry install --with dev
 

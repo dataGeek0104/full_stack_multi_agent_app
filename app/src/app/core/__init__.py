@@ -1,8 +1,8 @@
 import os
 
 from dotenv import load_dotenv  # type: ignore[import-not-found]
-from flask import Flask  # type: ignore[import-not-found]
-from src.app.core.routes import api_bp
+from flask import Blueprint, Flask  # type: ignore[import-not-found]
+from src.app.core.routes import core_bp
 from src.app.extensions import db
 
 
@@ -16,7 +16,11 @@ def create_app():
     app.config["SECRET_KEY"] = os.getenv("SECRET_KEY")
 
     # Register routes
-    app.register_blueprint(api_bp, url_prefix="/api/v0")
+    api_v0 = Blueprint("api_v0", __name__, url_prefix="/api/v0")
+    api_v0.register_blueprint(core_bp, url_prefix="")
+
+    # Register the global blueprint with the app
+    app.register_blueprint(api_v0)
 
     db.init_app(app)
 

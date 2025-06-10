@@ -8,7 +8,7 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Edit <code>src/App.tsx</code> and save to reload.
+          This is the frontend for <strong>Multi Agentic</strong> Application.
         </p>
         <a
           className="App-link"
@@ -16,7 +16,16 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Learn React
+          Learn <strong>React</strong>
+        </a>
+        <a
+          className="App-link"
+          href="https://www.langchain.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{ marginTop: '1rem' }}
+        >
+          Learn <strong>Langchain</strong> and <strong>Langgraph</strong>
         </a>
       </header>
     </div>

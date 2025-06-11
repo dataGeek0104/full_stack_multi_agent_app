@@ -3,7 +3,7 @@ services:
     build:
       context: ./app
       dockerfile: Dockerfile
-    container_name: full-stack-multi-agent
+    container_name: full-stack-multi-agent-backend
     ports:
       - "5001:5001"
     volumes:
@@ -24,6 +24,20 @@ services:
       - postgres_data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
+
+  frontend:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    container_name: full-stack-multi-agent-frontend
+    ports:
+      - "3001:3001"
+    volumes:
+      - ./client:/client
+    env_file:
+      - .env
+    depends_on:
+      - backend
 
 volumes:
   postgres_data:

@@ -28,6 +28,7 @@ This app consists of:
 ```env
 HOST=0.0.0.0
 BACKEND_PORT=5001
+PORT=3001
 POSTGRES_USER=<your_postgres_user>
 POSTGRES_PASSWORD=<your_postgres_password>
 POSTGRES_DB=<your_postgres_db>

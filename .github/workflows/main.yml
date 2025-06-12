@@ -71,10 +71,6 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 18
-          cache: "pnpm"
-          cache-dependency-path: |
-            ./client/pnpm-lock.yaml
-            ./client/package-lock.json
 
       - name: Install pnpm
         run: npm install -g pnpm
@@ -82,7 +78,7 @@ jobs:
       - name: Install frontend dependencies
         run: |
           cd client
-          pnpm install --frozen-lockfile
+          pnpm install
 
       - name: Build frontend
         run: |

@@ -22,7 +22,7 @@ jobs:
     env:
       DATABASE_URL: ${{ secrets.DATABASE_URL }}
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
       - name: Setup Python
         uses: actions/setup-python@v2
@@ -71,7 +71,9 @@ jobs:
         with:
           node-version: 18
           cache: "pnpm"
-          cache-dependency-path: "./client/pnpm-lock.yaml"
+          cache-dependency-path: |
+            ./client/pnpm-lock.yaml
+            ./client/package-lock.json
 
       - name: Install pnpm
         run: npm install -g pnpm
@@ -79,9 +81,10 @@ jobs:
       - name: Install frontend dependencies
         run: |
           cd client
-          pnpm install
+          pnpm install --frozen-lockfile
 
       - name: Build frontend
         run: |
           cd client
           pnpm build
+          pnpm test

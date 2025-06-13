@@ -26,16 +26,19 @@ This app consists of:
 ### 🛠️ Environment Variables (from `.env`)
 
 ```env
-HOST=0.0.0.0
+HOST="0.0.0.0"
 BACKEND_PORT=5001
 PORT=3001
-POSTGRES_USER=<your_postgres_user>
-POSTGRES_PASSWORD=<your_postgres_password>
-POSTGRES_DB=<your_postgres_db>
-DATABASE_URL=postgresql://<your_postgres_user>:<your_postgres_password>@localhost:5432/<your_postgres_db>
+SECRET_KEY=<your_secret_key>
+POSTGRES_HOST="lgmadb"
+POSTGRES_PORT=5432
+POSTGRES_USER="<your_postgres_user>"
+POSTGRES_PASSWORD="<your_postgres_password>"
+POSTGRES_DB="<your_postgres_db>"
+DATABASE_URL="postgresql+psycopg2://<your_postgres_user>:<your_postgres_password>@lgmadb:5432/<your_postgres_db>"
 ```
 
-(Ensure that you replace `<your_postgres_user>`, `<your_postgres_password>` and `<your_postgres_db>` with your actual postersql connection configurations.)
+(Ensure that you replace `<your_secret_key>` with your own secret-key and `<your_postgres_user>`, `<your_postgres_password>` and `<your_postgres_db>` with your actual postersql connection configurations.)
 
 ---
 

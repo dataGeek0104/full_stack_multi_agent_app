@@ -1,4 +1,18 @@
 services:
+  lgmadb:
+    image: postgres:16
+    container_name: lgmadb-postgres
+    environment:
+      POSTGRES_HOST: ${POSTGRES_HOST}
+      POSTGRES_PORT: ${POSTGRES_PORT}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
   backend:
     build:
       context: ./app
@@ -8,22 +22,13 @@ services:
       - "5001:5001"
     volumes:
       - ./app:/app
-    env_file:
-      - .env
-    depends_on:
-      - db
-
-  db:
-    image: postgres:15
-    container_name: lgmadb-postgres
     environment:
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      POSTGRES_DB: ${POSTGRES_DB}
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-    ports:
-      - "5432:5432"
+      HOST: ${HOST}
+      BACKEND_PORT: 5001
+      DATABASE_URL: ${DATABASE_URL}
+      SECRET_KEY: ${SECRET_KEY}
+    depends_on:
+      - lgmadb
 
   frontend:
     build:
@@ -34,8 +39,8 @@ services:
       - "3001:3001"
     volumes:
       - ./client:/client
-    env_file:
-      - .env
+    environment:
+      PORT: 3001
     depends_on:
       - backend
 

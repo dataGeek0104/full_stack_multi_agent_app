@@ -46,13 +46,6 @@ jobs:
           cd app
           poetry install --no-interaction
 
-      - name: Run migrations
-        env:
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
-        run: |
-          cd app/src
-          poetry run alembic upgrade head
-
       - name: Run tests
         env:
           SECRET_KEY: ${{ secrets.SECRET_KEY }}

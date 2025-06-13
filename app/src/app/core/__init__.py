@@ -2,8 +2,9 @@ import os
 
 from dotenv import load_dotenv  # type: ignore[import-not-found]
 from flask import Blueprint, Flask  # type: ignore[import-not-found]
-from src.app.core.routes import core_bp
-from src.app.extensions import db
+
+from app.core.routes import core_bp  # type: ignore[import-not-found]
+from app.extensions import db  # type: ignore[import-not-found]
 
 
 def create_app():

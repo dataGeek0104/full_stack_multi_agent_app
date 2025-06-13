@@ -1,6 +1,7 @@
 from flask import Blueprint, jsonify  # type: ignore[import-not-found]
 from sqlalchemy import text  # type: ignore[import-not-found]
-from src.app.extensions import db
+
+from app.extensions import db  # type: ignore[import-not-found]
 
 core_bp = Blueprint("core", __name__)
 

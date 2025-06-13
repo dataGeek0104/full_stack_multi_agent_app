@@ -1,6 +1,6 @@
 import os
 
-from src.app import app
+from app import app  # type: ignore[attr-defined]
 
 if __name__ == "__main__":
     host = os.getenv("HOST", "localhost")

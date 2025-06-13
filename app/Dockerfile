@@ -9,26 +9,25 @@ ENV POETRY_VERSION=1.7.1
 RUN curl -sSL https://install.python-poetry.org | python3.9 -
 ENV PATH="/root/.local/bin:$PATH"
 
-# Set working directory
 WORKDIR /app
 
 # Copy only the poetry files to install dependencies first (cache optimization)
 COPY pyproject.toml poetry.lock ./
+
 RUN poetry config virtualenvs.create true \
-    && poetry install --no-interaction --no-ansi \
-    && poetry install --with dev
+    && poetry install --no-interaction --no-ansi --no-root
 
 # Copy the rest of the app
 COPY . .
+
+RUN poetry install --no-interaction --no-ansi \
+    && poetry install --with dev
 
 # Set environment variables
 ENV PYTHONUNBUFFERED=1
 
 # Expose port (adjust if using FastAPI or Flask)
 EXPOSE 5001
-
-# Set the working directory to the app directory
-WORKDIR /app
 
 # Default command (adjust if different app entry point)
 CMD ["poetry", "run", "python", "-m", "src.run"]

@@ -15,7 +15,8 @@ WORKDIR /app
 COPY pyproject.toml poetry.lock ./
 
 RUN poetry config virtualenvs.create true \
-    && poetry install --no-interaction --no-ansi --no-root
+    && poetry install --no-interaction --no-ansi --no-root \
+    && poetry self add poetry-dotenv-plugin
 
 # Copy the rest of the app
 COPY . .

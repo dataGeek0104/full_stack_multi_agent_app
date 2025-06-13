@@ -34,7 +34,7 @@ Configured via `.env`:
 POSTGRES_DB=<your_postgres_db>
 POSTGRES_USER=<your_postgres_user>
 POSTGRES_PASSWORD=<your_postgres_password>
-DATABASE_URL=postgresql://<your_postgres_db>:<your_postgres_password>@db:5432/<your_postgres_db>
+DATABASE_URL=postgresql://<your_postgres_db>:<your_postgres_password>@localhost:5432/<your_postgres_db>
 ```
 
 (Ensure that you replace `<your_postgres_user>`, `<your_postgres_password>` and `<your_postgres_db>` with your actual postersql connection configurations.)

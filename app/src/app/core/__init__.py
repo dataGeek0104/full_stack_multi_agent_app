@@ -1,15 +1,12 @@
 import os
 
-from dotenv import load_dotenv  # type: ignore[import-not-found]
 from flask import Blueprint, Flask  # type: ignore[import-not-found]
 
-from app.core.routes import core_bp  # type: ignore[import-not-found]
-from app.extensions import db  # type: ignore[import-not-found]
+from ..core.routes import core_bp  # type: ignore[import-not-found]
+from ..extensions import db  # type: ignore[import-not-found]
 
 
 def create_app():
-    load_dotenv()  # Load environment variables from .env
-
     app = Flask(__name__)
 
     # Config from environment

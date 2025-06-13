@@ -13,8 +13,8 @@ def client():
     app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("DATABASE_URL")
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
-    db.init_app(app)
     app.register_blueprint(core_bp)
+    db.init_app(app)
 
     with app.app_context():
         db.create_all()
@@ -31,5 +31,5 @@ def test_health_check(client):
 
 def test_db_conn_check(client):
     response = client.get("/db-conn-check")
-    assert response.status_code == 200  # nosec
     assert response.json == {"message": "Yay! The DB is working fine!"}  # nosec
+    assert response.status_code == 200  # nosec

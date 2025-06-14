@@ -8,7 +8,7 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          This is the frontend for <strong>Multi Agentic</strong> Application.
+          Hey👋! This is the frontend for 🤖<strong>Multi Agentic</strong> Application.
         </p>
         <a
           className="App-link"

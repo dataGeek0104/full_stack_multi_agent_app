@@ -28,7 +28,7 @@ RUN poetry install --no-interaction --no-ansi \
 ENV PYTHONUNBUFFERED=1
 
 # Expose port (adjust if using FastAPI or Flask)
-EXPOSE 5001
+EXPOSE 5010
 
 # Default command (adjust if different app entry point)
 CMD ["poetry", "run", "python", "-m", "src.run"]

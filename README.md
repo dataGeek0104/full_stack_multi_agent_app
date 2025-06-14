@@ -27,15 +27,16 @@ This app consists of:
 
 ```env
 HOST="0.0.0.0"
-BACKEND_PORT=5001
-PORT=3001
+BACKEND_PORT=5010
+PORT=3010
 SECRET_KEY=<your_secret_key>
-POSTGRES_HOST="lgmadb"
+POSTGRES_HOST="pglgma"
 POSTGRES_PORT=5432
 POSTGRES_USER="<your_postgres_user>"
 POSTGRES_PASSWORD="<your_postgres_password>"
 POSTGRES_DB="<your_postgres_db>"
-DATABASE_URL="postgresql+psycopg2://<your_postgres_user>:<your_postgres_password>@lgmadb:5432/<your_postgres_db>"
+POSTGRES_SCHEMA="lgma"
+SQLALCHEMY_DATABASE_URI="postgresql+psycopg2://<your_postgres_user>:<your_postgres_password>@pglgma:5432/<your_postgres_db>"
 ```
 
 (Ensure that you replace `<your_secret_key>` with your own secret-key and `<your_postgres_user>`, `<your_postgres_password>` and `<your_postgres_db>` with your actual postersql connection configurations.)
@@ -54,7 +55,7 @@ docker compose up --build
   - App health check:
 
     ```bash
-    curl -X GET "http://localhost:5001/api/v0/health-check"
+    curl -X GET "http://localhost:5010/api/v0/health-check"
     ```
 
     Output:
@@ -68,7 +69,7 @@ docker compose up --build
   - Database connection check:
 
     ```bash
-    curl -X GET "http://localhost:5001/api/v0/db-conn-check"
+    curl -X GET "http://localhost:5010/api/v0/db-conn-check"
     ```
 
     Output:

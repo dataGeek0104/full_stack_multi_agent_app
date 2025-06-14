@@ -2,15 +2,16 @@ import os
 
 import pytest  # type: ignore[import-not-found]
 from flask import Flask  # type: ignore[import-not-found]
-from src.app.core.routes import core_bp
-from src.app.extensions import db
+
+from app.core.routes import core_bp  # type: ignore[import-not-found]
+from app.extensions import db  # type: ignore[import-not-found]
 
 
 @pytest.fixture
 def client():
     app = Flask(__name__)
     app.config["TESTING"] = True
-    app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("DATABASE_URL")
+    app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("SQLALCHEMY_DATABASE_URI")
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
     app.register_blueprint(core_bp)

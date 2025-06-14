@@ -18,7 +18,7 @@ COPY . .
 RUN pnpm build
 
 # Expose port 3000 for the application
-EXPOSE 3001
+EXPOSE 3010
 
 WORKDIR /client
 

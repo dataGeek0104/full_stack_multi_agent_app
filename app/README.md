@@ -32,12 +32,13 @@ Configured via `.env`:
 
 ```env
 SECRET_KEY=<your_secret_key>
-POSTGRES_HOST="lgmadb"
+POSTGRES_HOST="pglgma"
 POSTGRES_PORT=5432
 POSTGRES_DB="<your_postgres_db>"
 POSTGRES_USER="<your_postgres_user>"
 POSTGRES_PASSWORD="<your_postgres_password>"
-DATABASE_URL="postgresql://<your_postgres_db>:<your_postgres_password>@localhost:5432/<your_postgres_db>"
+POSTGRES_SCHEMA="lgma"
+SQLALCHEMY_DATABASE_URI="postgresql://<your_postgres_db>:<your_postgres_password>@pglgma:5432/<your_postgres_db>"
 ```
 
 (Ensure that you replace `<your_secret_key>` with your own secret-key and `<your_postgres_user>`, `<your_postgres_password>` and `<your_postgres_db>` with your actual postersql connection configurations.)

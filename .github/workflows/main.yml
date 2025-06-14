@@ -10,7 +10,7 @@ jobs:
         image: postgres:13
         env:
           POSTGRES_USER: lgma_user_000
-          POSTGRES_PASSWORD: ${{ secrets.DATABASE_USER_PASSWORD }}
+          POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
           POSTGRES_DB: lgmadb
         ports:
           - 5432:5432
@@ -20,7 +20,7 @@ jobs:
           --health-timeout 5s
           --health-retries 5
     env:
-      DATABASE_URL: ${{ secrets.DATABASE_URL }}
+      SQLALCHEMY_DATABASE_URI: ${{ secrets.SQLALCHEMY_DATABASE_URI }}
     steps:
       - uses: actions/checkout@v4
 
@@ -49,7 +49,7 @@ jobs:
       - name: Run tests
         env:
           SECRET_KEY: ${{ secrets.SECRET_KEY }}
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          SQLALCHEMY_DATABASE_URI: ${{ secrets.SQLALCHEMY_DATABASE_URI }}
         run: |
           cd app
           poetry run pytest

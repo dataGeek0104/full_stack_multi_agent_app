@@ -8,9 +8,12 @@
 app/src/__pycache__
 app/src/app/__pycache__
 app/src/app/core/__pycache__
+app/src/app/user/__pycache__
 app/tests/__pycache__
 app/tests/core/__pycache__
-app/src/migrations/__pycache__
+app/tests/user/__pycache__
+app/migrations/__pycache__
+app/migrations/versions/__pycache__
 
 # frontend
 client/package-lock.json

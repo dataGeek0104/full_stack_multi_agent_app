@@ -2,6 +2,7 @@ import os
 
 import pytest  # type: ignore[import-not-found]
 from flask import Flask  # type: ignore[import-not-found]
+from sqlalchemy import text  # type: ignore[import-not-found]
 
 from app.core.routes import core_bp  # type: ignore[import-not-found]
 from app.extensions import db  # type: ignore[import-not-found]
@@ -18,6 +19,10 @@ def client():
     db.init_app(app)
 
     with app.app_context():
+        schema = os.getenv("POSTGRES_SCHEMA", "lgma")
+        with db.engine.begin() as conn:
+            conn.execute(text(f"CREATE SCHEMA IF NOT EXISTS {schema};"))
+
         db.create_all()
 
     with app.test_client() as client:

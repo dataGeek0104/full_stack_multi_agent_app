@@ -1,6 +1,8 @@
 # Use an official Node runtime as a parent image
 FROM node:18
 
+RUN apt-get update && apt-get upgrade -y
+
 # Set the working directory to /client
 WORKDIR /client
 

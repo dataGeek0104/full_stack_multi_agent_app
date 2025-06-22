@@ -21,8 +21,7 @@ services:
     ports:
       - "5010:5010"
     volumes:
-      - .:/app
-    working_dir: /app
+      - ./app:/app
     environment:
       HOST: ${HOST}
       BACKEND_PORT: 5010
@@ -39,7 +38,7 @@ services:
     ports:
       - "3010:3010"
     volumes:
-      - .:/client
+      - ./client:/client
     environment:
       PORT: 3010
     depends_on:

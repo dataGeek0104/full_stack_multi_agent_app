@@ -9,6 +9,7 @@ app/src/__pycache__
 app/src/app/__pycache__
 app/src/app/core/__pycache__
 app/src/app/user/__pycache__
+app/src/app/multiagent/__pycache__
 app/tests/__pycache__
 app/tests/core/__pycache__
 app/tests/user/__pycache__

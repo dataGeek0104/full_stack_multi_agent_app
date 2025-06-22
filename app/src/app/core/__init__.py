@@ -10,6 +10,8 @@ from ..core.routes import core_bp  # type: ignore[import-not-found]
 from ..extensions import db, db_migrate  # type: ignore[import-not-found]
 from ..user.routes import user_bp  # type: ignore[import-not-found]
 
+from ..multiagent.routes import multi_agent_bp  # type: ignore[import-not-found]  # isort: skip
+
 from flask_migrate import init, migrate, upgrade  # type: ignore[import-untyped]  # isort: skip
 
 
@@ -31,6 +33,7 @@ def create_app():
     api_v0 = Blueprint("api_v0", __name__, url_prefix="/api/v0")
     api_v0.register_blueprint(core_bp, url_prefix="")
     api_v0.register_blueprint(user_bp, url_prefix="user")
+    api_v0.register_blueprint(multi_agent_bp, url_prefix="multi-agent")  # isort: skip
 
     # Register the global blueprint with the app
     app.register_blueprint(api_v0)

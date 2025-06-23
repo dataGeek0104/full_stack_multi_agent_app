@@ -1,12 +1,12 @@
-# Use official Python 3.9 base image
-FROM python:3.9-slim
+# Use official Python 3.10 base image
+FROM python:3.10-slim
 
 # Install system dependencies
 RUN apt-get update && apt-get upgrade -y && apt-get install -y curl build-essential libpq-dev && rm -rf /var/lib/apt/lists/*
 
 # Install Poetry
 ENV POETRY_VERSION=1.7.1
-RUN curl -sSL https://install.python-poetry.org | python3.9 -
+RUN curl -sSL https://install.python-poetry.org | python3.10 -
 ENV PATH="/root/.local/bin:$PATH"
 
 WORKDIR /app

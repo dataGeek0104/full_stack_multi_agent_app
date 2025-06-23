@@ -9,7 +9,7 @@ This backend handles the logic for autonomous agents and interacts with the Post
 ### 🧱 Base Image
 
 ```Dockerfile
-FROM python:3.9-slim
+FROM python:3.10-slim
 ```
 
 All dependencies and services are installed via `poetry`.

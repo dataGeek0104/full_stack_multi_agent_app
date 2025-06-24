@@ -55,28 +55,29 @@ jobs:
       #     cd app
       #     poetry run pytest
 
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          version: 10
-          run_install: false
+      # TODO: Build frontend when it is ready
+      # - name: Setup pnpm
+      #   uses: pnpm/action-setup@v4
+      #   with:
+      #     version: 10
+      #     run_install: false
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 18
+      # - name: Setup Node.js
+      #   uses: actions/setup-node@v4
+      #   with:
+      #     node-version: 18
 
-      - name: Install pnpm
-        run: npm install -g pnpm
+      # - name: Install pnpm
+      #   run: npm install -g pnpm
 
-      - name: Install frontend dependencies
-        run: |
-          cd client
-          pnpm install
+      # - name: Install frontend dependencies
+      #   run: |
+      #     cd client
+      #     pnpm install
 
-      # TODO: Uncomment when frontend tests are ready
-      - name: Build and Test frontend
-        run: |
-          cd client
-          pnpm build
-      #    pnpm test
+      # # TODO: Uncomment when frontend tests are ready
+      # - name: Build and Test frontend
+      #   run: |
+      #     cd client
+      #     pnpm build
+      # #    pnpm test

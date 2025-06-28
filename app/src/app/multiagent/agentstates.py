@@ -7,6 +7,7 @@ class FinalDispatch(TypedDict):
 
 
 class AgentState(TypedDict):
+    agent_type: str
     input: str
     intermediate_steps: list[tuple[str, Any]]
     decision_output: Any

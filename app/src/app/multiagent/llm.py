@@ -36,4 +36,4 @@ class LLMFactory:
         if provider_key not in cls._providers:
             raise ValueError(f"Unsupported model provider: {model_provider}")
         provider_cls = cls._providers[provider_key]
-        return provider_cls(model=model, google_api_key=api_key)
+        return provider_cls(model=model, google_api_key=api_key, stream=True)

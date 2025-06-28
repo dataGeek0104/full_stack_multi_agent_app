@@ -1,18 +1,24 @@
-from flask import Blueprint, jsonify, request  # type: ignore[import-not-found]  # isort: skip
+from flask import Blueprint, jsonify, request, Response, stream_with_context  # type: ignore[import-not-found]  # isort: skip
 from google.api_core.exceptions import ResourceExhausted  # type: ignore[import-not-found]  # isort: skip
 
-from .agentrunnables import FinancialRunnable
+from .agentrunnables import AgentRunnable
 
 multi_agent_bp = Blueprint("multi_agent", __name__)
 
 
 @multi_agent_bp.route("/chat", methods=["POST"])
-def signup():
+def chat():
     try:
         payload = request.json
-        runnable = FinancialRunnable()
-        response = runnable.run(question=payload["question"])
-        return jsonify(response), 200
+        runnable = AgentRunnable()
+
+        def generate():
+            for chunk in runnable.stream(
+                question=payload["question"], agent_type=payload["agent"]
+            ):
+                yield chunk
+
+        return Response(stream_with_context(generate()), mimetype="text/plain")
     except ResourceExhausted:
         return (
             jsonify(

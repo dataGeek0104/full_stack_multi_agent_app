@@ -26,5 +26,5 @@ class SimpleLLMChain:
         self.output_parser = StrOutputParser()
         self.runnable = self.prompt | self.llm | self.output_parser
 
-    def invoke(self, question: str) -> str:
-        return self.runnable.invoke({"question": question})
+    def invoke(self, question: str, domain: Optional[str] = None) -> str:
+        return self.runnable.invoke({"question": question, "domain": domain})

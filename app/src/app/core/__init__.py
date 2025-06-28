@@ -3,7 +3,8 @@ from typing import Optional
 
 import jwt  # type: ignore[import-not-found]
 from flask import Flask  # type: ignore[import-not-found]
-from flask import Blueprint, current_app, g, jsonify, request
+from flask import Blueprint, current_app, g, jsonify, make_response, request
+from flask_cors import CORS  # type: ignore[import-untyped]
 from sqlalchemy import text  # type: ignore[import-not-found]
 
 from ..core.routes import core_bp  # type: ignore[import-not-found]
@@ -21,6 +22,18 @@ from app.user.models import User  # type: ignore[import-not-found]  # noqa: F401
 def create_app():
     app = Flask(__name__)
 
+    CORS(
+        app,
+        resources={
+            r"/api/v0/*": {
+                "origins": "http://localhost:3010",
+                "methods": ["OPTIONS", "GET", "POST"],
+                "allow_headers": ["Content-Type", "Authorization"],
+                "supports_credentials": True,
+            }
+        },
+    )
+
     # Config from environment
     app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("SQLALCHEMY_DATABASE_URI")
     app.config["SECRET_KEY"] = os.getenv("SECRET_KEY")
@@ -28,6 +41,11 @@ def create_app():
 
     db.init_app(app)
     db_migrate.init_app(app, db)
+
+    @app.before_request
+    def skip_auth_for_options():
+        if request.method == "OPTIONS":
+            return make_response(("", 200))
 
     # Register routes
     api_v0 = Blueprint("api_v0", __name__, url_prefix="/api/v0")

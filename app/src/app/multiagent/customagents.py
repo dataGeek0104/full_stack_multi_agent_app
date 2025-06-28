@@ -4,7 +4,16 @@ from dataclasses import dataclass
 from .agentstates import AgentState, FinalDispatch
 from .customchains import SimpleLLMChain
 from .customtools import WebSearchTool
-from .prompts import decision_prompt, general_answer_prompt, routing_prompt
+
+from .prompts import (  # isort: skip
+    decision_prompt,
+    farming_answer_prompt,
+    financial_answer_prompt,
+    healthcare_answer_prompt,
+    retail_answer_prompt,
+    routing_prompt,
+    web_search_prompt,
+)
 
 from langgraph.graph import END, START, StateGraph  # type: ignore[import-not-found]  # isort: skip
 from langgraph.graph.state import CompiledStateGraph  # type: ignore[import-not-found]  # isort: skip
@@ -28,7 +37,7 @@ class RoutingOutput:
     step: PlanStep
 
 
-class FinancialAgent:
+class Agent:
     def __init__(self):
         self.model_provider = "google-genai"
 
@@ -97,8 +106,17 @@ class FinancialAgent:
         return state
 
     def general_answer(self, state: AgentState) -> AgentState:
+        domain_prompt = ""
+        if state["agent_type"] == "bnf":
+            domain_prompt = financial_answer_prompt
+        elif state["agent_type"] == "frm":
+            domain_prompt = farming_answer_prompt
+        elif state["agent_type"] == "hlc":
+            domain_prompt = healthcare_answer_prompt
+        else:
+            domain_prompt = retail_answer_prompt
         chain = SimpleLLMChain(
-            model_provider=self.model_provider, sys_prompt=general_answer_prompt
+            model_provider=self.model_provider, sys_prompt=domain_prompt
         )
         response = chain.invoke(question=state["input"])
         state["intermediate_steps"].append(
@@ -108,13 +126,23 @@ class FinancialAgent:
         return state
 
     def web_search(self, state: AgentState) -> AgentState:
+        domain = ""
         topic = state["routing_output"].step.topic
         search_tool = WebSearchTool(topic=topic)
+        # raw_results = search_tool.invoke(state["input"])
         chain = SimpleLLMChain(
-            model_provider=self.model_provider, sys_prompt=general_answer_prompt
+            model_provider=self.model_provider, sys_prompt=web_search_prompt
         )
-        chain.llm.bind_tools(tools=[search_tool.as_tool()])
-        response = chain.invoke(question=state["input"])
+        if state["agent_type"] == "bnf":
+            domain = "Banking and Finance"
+        elif state["agent_type"] == "frm":
+            domain = "Farming"
+        elif state["agent_type"] == "hlc":
+            domain = "Healthcare"
+        elif state["agent_type"] == "rtl":
+            domain = "Retail"
+        chain.llm.bind_tools([search_tool.as_tool()])
+        response = chain.invoke(question=state["input"], domain=domain)
         state["intermediate_steps"].append(
             ("web_search", state["decision_output"].reasoning)
         )

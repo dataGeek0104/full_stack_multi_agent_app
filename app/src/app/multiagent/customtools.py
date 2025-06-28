@@ -17,10 +17,10 @@ class WebSearchTool(Tool):
         search = TavilySearch(
             max_results=1,
             topic=topic,
-            # include_answer=False,
-            # include_raw_content=False,
-            include_images=True,
-            include_image_descriptions=True,
+            include_answer=True,
+            include_raw_content=True,
+            # include_images=False,
+            # include_image_descriptions=False,
             # search_depth="basic",
             # time_range="day",
             # include_domains=None,
@@ -28,6 +28,6 @@ class WebSearchTool(Tool):
         )
         super().__init__(
             name="web_search",
-            description="Use this tool to search the web using Tavily Search. Provide a query to get results.",
+            description="Use this tool to search the web using Tavily Search. Provide a query to get web results.",
             func=search.invoke,
         )
